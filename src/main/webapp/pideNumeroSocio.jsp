@@ -22,7 +22,7 @@
     <%
       while (listado.next()) {
           out.println("<tr><td>");
-          out.println(listado.getString("socioID") + "</td>");
+          out.println(listado.getString("socioID") + "</td>"); //<a href="detalleSocio.jsp?socioid="+lisstado.getInt("socio")>listado.getString("socioID")</a></td>
           out.println("<td>" + listado.getString("nombre") + "</td>");
           out.println("<td>" + listado.getString("estatura") + "</td>");
           out.println("<td>" + listado.getString("edad") + "</td>");
@@ -33,7 +33,15 @@
         <input type="hidden" name="codigo" value="<%=listado.getString("socioID") %>"/>
         <input type="submit" value="borrar">
       </form>
-      </td></tr>
+      </td>
+        <td>
+            <form action="detalleSocio.jsp" method="get">
+                <input type="hidden" name="codigo" value="<%=listado.getString("socioID") %>">
+                <input type="submit" value="detalles">
+            </form>
+        </td>
+
+        </tr>
     <%
       } // while   
       conexion.close();
