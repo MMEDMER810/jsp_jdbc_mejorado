@@ -108,7 +108,7 @@
         }
 
         out.println("Socio dado de alta.");
-} else {
+    } else {
         out.println("Error de validación!");
     }
 %>

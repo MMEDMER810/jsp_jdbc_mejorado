@@ -36,7 +36,7 @@
       </td>
         <td>
             <form action="detalleSocio.jsp" method="get">
-                <input type="hidden" name="codigo" value="<%=listado.getString("socioID") %>">
+                <input type="hidden" name="socioID" value="<%=listado.getString("socioID") %>">
                 <input type="submit" value="detalles">
             </form>
         </td>

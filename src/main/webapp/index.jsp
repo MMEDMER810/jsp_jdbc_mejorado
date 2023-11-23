@@ -16,5 +16,10 @@
 <br>
 <a href="pideNumeroSocio.jsp">Listado de Socios</a>
 <br>
+<form method="get" action="detalleSocio.jsp">
+    Introduce ID del socio: <input type="text" name="socioID">
+    <input type="submit" value="Aceptar">
+</form>
+<br>
 </body>
 </html>
