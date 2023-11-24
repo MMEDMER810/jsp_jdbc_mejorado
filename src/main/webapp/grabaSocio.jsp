@@ -1,6 +1,7 @@
 <%@page import="java.sql.*" %>
 <%@page import="java.util.Objects" %>
 <%@ page import="java.io.IOException" %>
+<%@ page import="javax.swing.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -16,8 +17,16 @@
     int estatura = -1;
     int edad = -1;
     String localidad = null;
+    boolean flagValidaNumero = false;
+    boolean flagValidaNombreNull = false;
+    boolean flagValidaNombreBlank = false;
+    boolean flagValidaEstatura = false;
+    boolean flagValidaEdad = false;
+    boolean flagValidaLocalidad = false;
+
     try {
         numero = Integer.parseInt(request.getParameter("numero"));
+        flagValidaNumero = true;
 
         //UTILIZO LOS CONTRACTS DE LA CLASE Objects PARA LA VALIDACIÓN
         //             v---- LANZA NullPointerException SI EL PARÁMETRO ES NULL
@@ -27,12 +36,14 @@
         //          |                                EN EL CASO DE QUE SEA BLANCO LO RECIBIDO, LANZO UNA EXCEPCIÓN PARA INVALIDAR EL PROCESO DE VALIDACIÓN
         //          -------------------------v                      v---------------------------------------|
         if (request.getParameter("nombre").isBlank()) throw new RuntimeException("Parámetro vacío o todo espacios blancos.");
+        flagValidaNombreBlank = true;
         nombre = request.getParameter("nombre");
 
-
         estatura = Integer.parseInt(request.getParameter("estatura"));
+        flagValidaEstatura = true;
 
         edad = Integer.parseInt(request.getParameter("edad"));
+        flagValidaEdad = true;
 
         //UTILIZO LOS CONTRACTS DE LA CLASE Objects PARA LA VALIDACIÓN
         //             v---- LANZA NullPointerException SI EL PARÁMETRO ES NULL
@@ -42,11 +53,26 @@
         //          |                                EN EL CASO DE QUE SEA BLANCO LO RECIBIDO, LANZO UNA EXCEPCIÓN PARA INVALIDAR EL PROCESO DE VALIDACIÓN
         //          -------------------------v                      v---------------------------------------|
         if (request.getParameter("localidad").isBlank()) throw new RuntimeException("Parámetro vacío o todo espacios blancos.");
+        flagValidaLocalidad = true;
         localidad = request.getParameter("localidad");
 
     } catch (Exception ex) {
         ex.printStackTrace();
         valida = false;
+
+        if(!flagValidaNumero) {
+            session.setAttribute("error", "Error de número");
+        } else if (!flagValidaNombreNull) {
+            session.setAttribute("error", "Error de nombre nulo");
+        } else if (!flagValidaNombreBlank) {
+            session.setAttribute("error", "Error de nombre blanco" );
+        } else if (!flagValidaEdad) {
+            session.setAttribute("error", "Error en la edad");
+        } else if (!flagValidaEstatura) {
+            session.setAttribute("error", "Error en la estatura");
+        } else if (!flagValidaLocalidad) {
+            session.setAttribute("error", "Error en la localidad");
+        }
     }
     //FIN CÓDIGO DE VALIDACIÓN
 
@@ -92,7 +118,6 @@
             int filasAfectadas = ps.executeUpdate();
             System.out.println("SOCIOS GRABADOS:  " + filasAfectadas);
 
-
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -107,9 +132,14 @@
             } catch (Exception e) { /* Ignored */ }
         }
 
-        out.println("Socio dado de alta.");
+        //response.sendRedirect("detalleSocio.jsp?socioID="+numero);
+
+        session.setAttribute("socioIDADestacar", numero);
+        response.sendRedirect("pideNumeroSocio.jsp");
+
     } else {
-        out.println("Error de validación!");
+        //Redirige al formulario para mostrar el error
+        response.sendRedirect("formularioSocio.jsp");
     }
 %>
 
