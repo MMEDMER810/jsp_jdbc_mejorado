@@ -27,10 +27,10 @@
     try {
         numero = Integer.parseInt(request.getParameter("numero"));
         flagValidaNumero = true;
-
         //UTILIZO LOS CONTRACTS DE LA CLASE Objects PARA LA VALIDACIÓN
         //             v---- LANZA NullPointerException SI EL PARÁMETRO ES NULL
         Objects.requireNonNull(request.getParameter("nombre"));
+        flagValidaNombreNull = true;
         //CONTRACT nonBlank..
         //UTILIZO isBlank SOBRE EL PARÁMETRO DE TIPO String PARA CHEQUEAR QUE NO ES UN PARÁMETRO VACÍO "" NI CADENA TODO BLANCOS "    "
         //          |                                EN EL CASO DE QUE SEA BLANCO LO RECIBIDO, LANZO UNA EXCEPCIÓN PARA INVALIDAR EL PROCESO DE VALIDACIÓN
