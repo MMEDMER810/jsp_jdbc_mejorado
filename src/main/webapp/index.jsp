@@ -39,7 +39,12 @@
     Fecha de realización: <input type="date" name="fecha"  min=<%=fechaMin%>>
     <input type="submit" value="Aceptar">
 </form>
-
-<br>
+<%
+    String error = (String)session.getAttribute("error");
+    if (error!=null) {
+%>
+<span style="background-color: red; color: yellow"><%=error%></span>
+<%}%>
+<%session.removeAttribute("error");%>
 </body>
 </html>

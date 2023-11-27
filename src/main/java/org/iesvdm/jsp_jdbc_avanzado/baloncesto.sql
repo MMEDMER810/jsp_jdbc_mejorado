@@ -115,4 +115,11 @@ INSERT INTO `socio` (`socioID`, `nombre`, `estatura`, `edad`, `localidad`) VALUE
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-select * from socio;
+CREATE TABLE IF NOT EXISTS `entrenamiento` (
+    `idEntrenamiento` int(11) NOT NULL AUTO_INCREMENT,
+    `socioID` int(11) NOT NULL,
+    `tipo` varchar(40) COLLATE utf8_spanish2_ci NOT NULL,
+    `ubicacion` varchar(40) COLLATE utf8_spanish2_ci NOT NULL,
+    `fecha` DATE NOT NULL,
+    PRIMARY KEY (`idEntrenamiento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
