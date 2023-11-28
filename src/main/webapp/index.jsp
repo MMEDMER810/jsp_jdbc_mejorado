@@ -18,6 +18,8 @@
 <br>
 <a href="pideNumeroSocio.jsp">Listado de Socios</a>
 <br>
+<a href="listadoEntrenamientos.jsp">Listado de Entrenamientos</a>
+<h2>Ver detalles de un socio:</h2>
 <form method="get" action="detalleSocio.jsp">
     Introduce ID del socio: <input type="text" name="socioID">
     <input type="submit" value="Aceptar">
@@ -29,6 +31,7 @@
     DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     String fechaMin = hoy.format(formato);
 %>
+<h2>Añadir entrenamiento para un socio:</h2>
 <form method="get" action="crearEntrenamiento.jsp">
     Introduce ID del socio: <input type="text" name="socioID">
     <select name="tipoEntrenamiento">

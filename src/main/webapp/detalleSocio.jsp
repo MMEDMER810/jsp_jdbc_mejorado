@@ -1,16 +1,10 @@
 <%@ page import="java.util.Objects" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="javax.swing.*" %><%--
-  Created by IntelliJ IDEA.
-  User: mireya
-  Date: 20/11/23
-  Time: 14:11
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="javax.swing.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Detalle socio</title>
+    <title>Detalle entrenamiento</title>
 </head>
 <body>
     <%

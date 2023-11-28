@@ -98,13 +98,22 @@
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/baloncesto", "user", "user");
 
-            String sql = "INSERT INTO entrenamiento VALUES (" +
+            String sql = "INSERT INTO entrenamiento (socioID, tipoEntrenamiento, ubicacion, fecha) VALUES (" +
                     "?, " + //socioID
                     "?, " + //tipo entrenamiento
                     "?, " + //ubicacion
-                    "?)" + //Fecha
+                    "?)"; //Fecha
 
+            ps = conn.prepareStatement(sql);
+            int idx = 1;
+            ps.setInt(idx++, socioID);
+            ps.setString(idx++, tipoEntrenamiento);
+            ps.setString(idx++, ubicacion);
+            //pasar de fecha de java a fecha de sql
+            ps.setDate(idx++, new java.sql.Date(fecha.getTime()));
 
+            int filasAfectadas = ps.executeUpdate();
+            System.out.println("ENTRENAMIENTOS GRABADOS:  " + filasAfectadas);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,10 +128,12 @@
             }
         }
 
+        //Redirige al listado de los entrenamientos
+        response.sendRedirect("listadoEntrenamientos.jsp");
+
     } else {
         //Redirige y muestra el error
         response.sendRedirect("index.jsp");
-
     }
 
 

@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `baloncesto`
 --
+DROP DATABASE  IF EXISTS `baloncesto`;
 CREATE DATABASE IF NOT EXISTS `baloncesto` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 USE `baloncesto`;
 
@@ -118,8 +119,10 @@ INSERT INTO `socio` (`socioID`, `nombre`, `estatura`, `edad`, `localidad`) VALUE
 CREATE TABLE IF NOT EXISTS `entrenamiento` (
     `idEntrenamiento` int(11) NOT NULL AUTO_INCREMENT,
     `socioID` int(11) NOT NULL,
-    `tipo` varchar(40) COLLATE utf8_spanish2_ci NOT NULL,
+    `tipoEntrenamiento` varchar(40) COLLATE utf8_spanish2_ci NOT NULL,
     `ubicacion` varchar(40) COLLATE utf8_spanish2_ci NOT NULL,
     `fecha` DATE NOT NULL,
     PRIMARY KEY (`idEntrenamiento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+INSERT INTO `entrenamiento` (socioID, tipoEntrenamiento, ubicacion, fecha) VALUES (55, 'Técnico', 'Mijas', '2023-12-09' );
